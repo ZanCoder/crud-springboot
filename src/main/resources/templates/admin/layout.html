@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:fragment="dynamic(view)">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard Shoes</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/images/logos/favicon.png}" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+
+<body>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar" th:insert="~{/admin/_left-sidebar :: aside}">
+
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+        <!--  Header Start -->
+        <header class="app-header" th:insert="~{/admin/_header :: header}">
+
+        </header>
+        <!--  Header End -->
+        <div class="container-fluid" th:replace="${view}">
+
+        </div>
+    </div>
+</div>
+<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/sidebarmenu.js}"></script>
+<script th:src="@{/js/app.min.js}"></script>
+<script th:src="@{/libs/apexcharts/dist/apexcharts.min.js}"></script>
+<script th:src="@{/libs/simplebar/dist/simplebar.js}"></script>
+<script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>

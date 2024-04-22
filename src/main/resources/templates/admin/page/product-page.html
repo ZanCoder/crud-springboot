@@ -1,0 +1,78 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{/admin/layout :: dynamic(~{::body})}">
+<body>
+<div style="padding-top: 70px; padding-left: 20px;">
+    <h3>Products List</h3>
+    <hr/>
+    <a th:href="@{/admin/product/create}" class="btn btn-success">Create</a>
+    <hr/>
+    <div th:if="${message}" class="alert alert-success alert-dismissible fade show" role="alert">
+        [[${message}]]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+        <form action="#" th:action="@{/admin/product/page/1}" method="GET" class="row g-3">
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="Search..." name="name">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+            </div>
+        </form>
+        <div class="href-sort">
+            <a class="btn btn-info" th:href="@{/admin/product/sort-asc}">Sắp xếp tăng dần</a>
+            <a class="btn btn-primary" th:href="@{/admin/product/sort-desc}">Sắp xếp giảm dần</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <th scope="row" th:text="${product.id}"></th>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td>
+                <a th:href="@{/admin/product/update(id=${product.id})}" class="btn btn-warning">Edit</a> |
+                <a class="btn btn-danger" th:href="@{/admin/product/delete(id=${product.id})}"
+                   onclick="return confirm('Bạn có muốn xoá sản phẩm này không?');">
+                    Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav class="text-center" aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" th:classappend="${currentPage > 0 ? '' : 'disabled'}"
+                                     th:href="@{'/admin/product/page/1' + '?name=' +${keyword}}">First</a></li>
+            <li class="page-item"><a class="page-link" th:classappend="${currentPage > 0 ? '' : 'disabled'}"
+                                     th:href="@{'/admin/product/page/' + ${currentPage - 1} + '?name=' +${keyword}}">Previous</a>
+            </li>
+
+            <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}"
+                th:classappend="${currentPage == i ? 'active' : ''}">
+                <a class="page-link" th:href="@{'/admin/product/page/' + ${i} + '?name=' +${keyword}}">[[${i}]]</a>
+            </li>
+
+            <li class="page-item"><a class="page-link" th:classappend="${currentPage < totalPages ? '' : 'disabled'}"
+                                     th:href="@{'/admin/product/page/' + ${currentPage + 1} + '?name=' +${keyword}}">Next</a>
+            </li>
+            <li class="page-item"><a class="page-link" th:classappend="${currentPage < totalPages ? '' : 'disabled'}"
+                                     th:href="@{'/admin/product/page/' + ${totalPages} + '?name=' +${keyword}}">Last</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

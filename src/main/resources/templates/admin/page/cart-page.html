@@ -1,0 +1,58 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{/admin/layout :: dynamic(~{::body})}">
+<body>
+<div style="padding-top: 70px; padding-left: 20px;">
+    <h3>Cart</h3>
+    <hr/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Create On</th>
+            <th scope="col">Status</th>
+            <th scope="col">Customer ID</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cart : ${cartDtos}">
+            <th scope="row" th:text="${cart.id}"></th>
+            <td th:text="${cart.createOn}"></td>
+            <td th:text="${cart.status}"></td>
+            <td th:text="${cart.customerId}"></td>
+            <td><a href="#" class="btn btn-warning">Edit</a> |
+                <a href="#" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <hr/>
+    <h3>Cart Detail</h3>
+    <hr/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price Amount</th>
+            <th scope="col">Product ID</th>
+            <th scope="col">Cart ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cartDetail : ${cartDetailDtos}">
+            <th scope="row" th:text="${cartDetail.id}"></th>
+            <td th:text="${cartDetail.price}"></td>
+            <td th:text="${cartDetail.quantity}"></td>
+            <td th:text="${cartDetail.price_amount}"></td>
+            <td th:text="${cartDetail.productId}"></td>
+            <td th:text="${cartDetail.cartId}"></td>
+            <td><a href="#" class="btn btn-warning">Edit</a> |
+                <a href="#" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

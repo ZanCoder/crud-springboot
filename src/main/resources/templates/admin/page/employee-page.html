@@ -1,0 +1,43 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{/admin/layout :: dynamic(~{::body})}">
+<body>
+<div style="padding-top: 70px; padding-left: 20px;">
+    <h3>Employees List</h3>
+    <hr/>
+    <a th:href="@{/admin/employee/create}" class="btn btn-success">Create</a>
+    <hr/>
+    <form action="#" th:action="@{/admin/employee/search}" method="GET" class="row g-3">
+        <div class="col-auto">
+            <input type="text" class="form-control" placeholder="Search..." name="name">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Search</button>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <th scope="row" th:text="${employee.id}"></th>
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.address}"></td>
+            <td th:text="${employee.phoneNumber}"></td>
+            <td><a th:href="@{/admin/employee/update(id=${employee.id})}" class="btn btn-warning">Edit</a> |
+                <a th:href="@{/admin/employee/delete(id=${employee.id})}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

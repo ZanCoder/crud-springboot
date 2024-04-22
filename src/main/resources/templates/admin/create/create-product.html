@@ -1,0 +1,48 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{/admin/layout :: dynamic(~{::body})}">
+<body>
+<div style="padding: 100px;">
+    <h3>Create Product</h3>
+    <hr/>
+    <form action="#" th:action="@{/admin/product/create}" method="POST" th:object="${products}">
+        <div class="form-group">
+            <label for="exampleInputName1">Name</label>
+            <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" name="name"
+                   th:field="*{name}" placeholder="Nhập tên sản phẩm...">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputDescription1">Description</label>
+            <input type="text" class="form-control" id="exampleInputDescription1" name="description"
+                   th:field="*{description}" placeholder="Nhập mô tả...">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPrice1">Price</label>
+            <input type="text" class="form-control" id="exampleInputPrice1" name="price" th:field="*{price}"
+                   placeholder="Nhập giá...">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputQuantity1">Quantity</label>
+            <input type="text" class="form-control" id="exampleInputQuantity1" name="quantity" th:field="*{quantity}"
+                   placeholder="Nhập số lượng...">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputImage1">Image</label>
+            <input type="text" class="form-control" id="exampleInputImage1" name="image" th:field="*{image}"
+                   placeholder="Nhập Url image...">
+        </div>
+        <div class="form-group" th:name="categoryId">
+            <label for="exampleInputCategory1">Category ID</label>
+            <select id="exampleInputCategory1" class="form-select" aria-label="Default select example"
+                    th:field="*{categoryId}">
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:text="${category.name}">
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

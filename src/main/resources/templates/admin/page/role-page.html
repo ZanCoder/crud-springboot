@@ -1,0 +1,38 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{/admin/layout :: dynamic(~{::body})}">
+<body>
+<div style="padding-top: 70px; padding-left: 20px;">
+    <h3>Roles List</h3>
+    <hr/>
+    <div style="display: flex; justify-content: space-between;">
+        <form action="#" th:action="@{/admin/role/search}" method="GET" class="row g-3">
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="Search..." name="name">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+            </div>
+        </form>
+        <div class="href-sort">
+            <a class="btn btn-info" th:href="@{/admin/role/sort-asc}">Sắp xếp tăng dần</a>
+            <a class="btn btn-primary" th:href="@{/admin/role/sort-desc}">Sắp xếp giảm dần</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="role : ${roles}">
+            <th scope="row" th:text="${role.id}"></th>
+            <td th:text="${role.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

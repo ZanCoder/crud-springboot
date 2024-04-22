@@ -1,0 +1,43 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{/admin/layout :: dynamic(~{::body})}">
+<body>
+<div style="padding-top: 70px; padding-left: 20px;">
+    <h3>Category List</h3>
+    <hr/>
+    <a th:href="@{/admin/category/create}" class="btn btn-success">Create</a>
+    <hr/>
+    <div style="display: flex; justify-content: space-between;">
+        <form action="#" th:action="@{/admin/category/search}" method="GET" class="row g-3">
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="Search..." name="name">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+            </div>
+        </form>
+        <div class="href-sort">
+            <a class="btn btn-info" th:href="@{/admin/category/sort-asc}">Sắp xếp tăng dần</a>
+            <a class="btn btn-primary" th:href="@{/admin/category/sort-desc}">Sắp xếp giảm dần</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category : ${categories}">
+            <th scope="row" th:text="${category.id}"></th>
+            <td th:text="${category.name}"></td>
+            <td><a th:href="@{/admin/category/update(id=${category.id})}" class="btn btn-warning">Edit</a> |
+                <a th:href="@{/admin/category/delete(id=${category.id})}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

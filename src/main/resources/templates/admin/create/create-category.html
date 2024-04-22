@@ -1,0 +1,18 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{/admin/layout :: dynamic(~{::body})}">
+<body>
+<div style="padding: 100px;">
+    <h3>Create Category</h3>
+    <hr/>
+    <form action="#" th:action="@{/admin/category/create}" method="POST" th:object="${category}">
+        <div class="form-group">
+            <label for="exampleInputName1">Name</label>
+            <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" name="name"
+                   th:field="*{name}" placeholder="Nhập loại sản phẩm...">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
